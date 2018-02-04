@@ -291,6 +291,12 @@
     <Filter Include="SampleFramework12\HosekSky">
       <UniqueIdentifier>{04851386-edd7-402e-bacf-16bf98648c22}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{3e999ed7-0d0e-4351-8284-ff5c0b695fda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SampleFramework12\Shaders">
+      <UniqueIdentifier>{a74d81a4-a430-4415-8f7c-f36fe55cebef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="..\Externals\Assimp-3.1.1\bin\assimp.dll">
@@ -300,13 +306,93 @@
     <CustomBuild Include="..\Externals\WinPixEventRuntime\bin\WinPixEventRuntime.dll">
       <Filter>SampleFramework12\External DLLs</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\Externals\DXCompiler\Bin\dxcompiler.dll">
-      <Filter>SampleFramework12\External DLLs</Filter>
-    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="..\SampleFramework12\v1.01\sf12.natvis">
       <Filter>SampleFramework12</Filter>
     </Natvis>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Resolve.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Shading.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Picking.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="PostProcessing.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Mesh.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Deferred.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="DepthOnly.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="MSAAMask.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Clusters.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="ClusterVisualizer.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="AppSettings.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\SampleFramework12\v1.01\Shaders\Shadows.hlsl">
+      <Filter>SampleFramework12\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\SampleFramework12\v1.01\Shaders\Skybox.hlsl">
+      <Filter>SampleFramework12\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\SampleFramework12\v1.01\Shaders\SMConvert.hlsl">
+      <Filter>SampleFramework12\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\SampleFramework12\v1.01\Shaders\Sprite.hlsl">
+      <Filter>SampleFramework12\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\SampleFramework12\v1.01\Shaders\MSM.hlsl">
+      <Filter>SampleFramework12\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\SampleFramework12\v1.01\Shaders\PPCommon.hlsl">
+      <Filter>SampleFramework12\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\SampleFramework12\v1.01\Shaders\Quaternion.hlsl">
+      <Filter>SampleFramework12\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\SampleFramework12\v1.01\Shaders\SH.hlsl">
+      <Filter>SampleFramework12\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\SampleFramework12\v1.01\Shaders\DescriptorTables.hlsl">
+      <Filter>SampleFramework12\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\SampleFramework12\v1.01\Shaders\EVSM.hlsl">
+      <Filter>SampleFramework12\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\SampleFramework12\v1.01\Shaders\FullScreenTriangle.hlsl">
+      <Filter>SampleFramework12\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\SampleFramework12\v1.01\Shaders\ImGui.hlsl">
+      <Filter>SampleFramework12\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\SampleFramework12\v1.01\Shaders\Constants.hlsl">
+      <Filter>SampleFramework12\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\SampleFramework12\v1.01\Shaders\Conversion.hlsl">
+      <Filter>SampleFramework12\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\SampleFramework12\v1.01\Shaders\DecodeTextureCS.hlsl">
+      <Filter>SampleFramework12\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="..\SampleFramework12\v1.01\Shaders\BRDF.hlsl">
+      <Filter>SampleFramework12\Shaders</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>
