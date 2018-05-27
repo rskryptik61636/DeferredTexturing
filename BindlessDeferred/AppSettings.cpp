@@ -56,6 +56,8 @@ namespace AppSettings
     FloatSetting BloomExposure;
     FloatSetting BloomMagnitude;
     FloatSetting BloomBlurSigma;
+    FloatSetting SSRoughnessMinThreshold;
+    FloatSetting SSRoughnessMaxThreshold;
     BoolSetting EnableVSync;
     BoolSetting EnableAlbedoMaps;
     BoolSetting EnableNormalMaps;
@@ -66,24 +68,27 @@ namespace AppSettings
     BoolSetting ShowMSAAMask;
     BoolSetting ShowUVGradients;
     BoolSetting AnimateLightIntensity;
-
+    BoolSetting ShowSSRCompatibleOutput;
+    
     ConstantBuffer CBuffer;
     const uint32 CBufferRegister = 12;
 
     void Initialize()
     {
 
-        Settings.Initialize(6);
+        Settings.Initialize(7);
 
-        Settings.AddGroup("Sun And Sky", true);
+        Settings.AddGroup("Sun And Sky", false/*true*/);
 
-        Settings.AddGroup("Anti Aliasing", true);
+        Settings.AddGroup("Anti Aliasing", false/*true*/);
 
-        Settings.AddGroup("Scene", true);
+        Settings.AddGroup("Scene", false/*true*/);
 
-        Settings.AddGroup("Rendering", true);
+        Settings.AddGroup("Rendering", false/*true*/);
 
         Settings.AddGroup("Post Processing", false);
+
+        Settings.AddGroup( "Screen Space Reflections", true );
 
         Settings.AddGroup("Debug", true);
 
@@ -156,6 +161,12 @@ namespace AppSettings
         BloomBlurSigma.Initialize("BloomBlurSigma", "Post Processing", "Bloom Blur Sigma", "Sigma parameter of the Gaussian filter used in the bloom pass", 2.5000f, 0.5000f, 2.5000f, 0.0100f, ConversionMode::None, 1.0000f);
         Settings.AddSetting(&BloomBlurSigma);
 
+        SSRoughnessMinThreshold.Initialize("SSRoughnessMinThreshold", "Screen Space Reflections", "Roughness Min Threshold", "Roughness min threshold for SSR", 0.07f, 0.0f, 1.0f, 0.01f, ConversionMode::None, 1.0000f);
+        Settings.AddSetting(&SSRoughnessMinThreshold);
+
+        SSRoughnessMaxThreshold.Initialize( "SSRoughnessMaxThreshold", "Screen Space Reflections", "Roughness Max Threshold", "Roughness max threshold for SSR", 0.3f, 0.0f, 1.0f, 0.01f, ConversionMode::None, 1.0000f );
+        Settings.AddSetting( &SSRoughnessMaxThreshold );
+
         EnableVSync.Initialize("EnableVSync", "Debug", "Enable VSync", "Enables or disables vertical sync during Present", true);
         Settings.AddSetting(&EnableVSync);
 
@@ -186,6 +197,9 @@ namespace AppSettings
         AnimateLightIntensity.Initialize("AnimateLightIntensity", "Debug", "Animate Light Intensity", "Modulates the light intensity to test buffer uploads", false);
         Settings.AddSetting(&AnimateLightIntensity);
 
+        ShowSSRCompatibleOutput.Initialize( "ShowSSRCompatibleOutput", "Debug", "Show SSR Compatible Output", "Shows the materials which are SSR compatible", false );
+        Settings.AddSetting( &ShowSSRCompatibleOutput );
+
         ConstantBufferInit cbInit;
         cbInit.Size = sizeof(AppSettingsCBuffer);
         cbInit.Dynamic = true;
@@ -214,6 +228,8 @@ namespace AppSettings
         cbData.BloomExposure = BloomExposure;
         cbData.BloomMagnitude = BloomMagnitude;
         cbData.BloomBlurSigma = BloomBlurSigma;
+        cbData.SSRoughnessMinThreshold = SSRoughnessMinThreshold;
+        cbData.SSRoughnessMaxThreshold = SSRoughnessMaxThreshold;
         cbData.EnableAlbedoMaps = EnableAlbedoMaps;
         cbData.EnableNormalMaps = EnableNormalMaps;
         cbData.EnableSpecular = EnableSpecular;
@@ -222,6 +238,7 @@ namespace AppSettings
         cbData.ShowMSAAMask = ShowMSAAMask;
         cbData.ShowUVGradients = ShowUVGradients;
         cbData.AnimateLightIntensity = AnimateLightIntensity;
+        cbData.ShowSSRCompatibleOutput = ShowSSRCompatibleOutput;
 
         CBuffer.MapAndSetData(cbData);
     }

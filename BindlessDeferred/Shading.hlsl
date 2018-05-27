@@ -333,5 +333,14 @@ float3 ShadePixel(in ShadingInput input, in Texture2DArray SunShadowMap,
 
     output = clamp(output, 0.0f, FP16Max);
 
+    // Roughness test.
+    if (AppSettings.ShowSSRCompatibleOutput &&
+        ( AppSettings.SSRoughnessMinThreshold < AppSettings.SSRoughnessMaxThreshold ) &&    // Min threshold must always be lesser than max threshold
+        ( roughness < AppSettings.SSRoughnessMinThreshold ||
+          roughness > AppSettings.SSRoughnessMaxThreshold))
+    {
+        output = float3(0, 0, 0);
+    }
+
     return output;
 }

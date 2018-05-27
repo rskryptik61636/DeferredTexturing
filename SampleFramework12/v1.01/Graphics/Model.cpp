@@ -477,6 +477,34 @@ void Model::CreateWithAssimp(const ModelLoadSettings& settings)
 
     scene = importer.ApplyPostProcessing(flags);
 
+    static const char* roughnessMaps[] = {
+        "Sponza_Thorn_roughness.png",
+        "VasePlant_roughness.png",
+        "VaseRound_roughness.png",
+        "Background_Roughness.png",
+        "Sponza_Bricks_a_Roughness.png",
+        "Sponza_Arch_roughness.png",
+        "Sponza_Ceiling_roughness.png",
+        "Sponza_Column_a_roughness.png",
+        "Sponza_Floor_roughness.png",
+        "Sponza_Column_c_roughness.png",
+        "Sponza_Details_roughness.png",
+        "Sponza_Column_b_roughness.png",
+        "",
+        "Sponza_FlagPole_roughness.png",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "ChainTexture_Roughness.png",
+        "VaseHanging_roughness.png",
+        "Vase_roughness.png",
+        "Lion_Roughness.png",
+        "Sponza_Roof_roughness.png"
+    };
+
     // Load the materials
     const uint64 numMaterials = scene->mNumMaterials;
     meshMaterials.Init(numMaterials);
@@ -496,8 +524,15 @@ void Model::CreateWithAssimp(const ModelLoadSettings& settings)
            || mat.GetTexture(aiTextureType_HEIGHT, 0, &normalMapPath) == aiReturn_SUCCESS)
             material.TextureNames[uint64(MaterialTextures::Normal)] = GetFileName(AnsiToWString(normalMapPath.C_Str()).c_str());
 
-        if(mat.GetTexture(aiTextureType_SHININESS, 0, &roughnessMapPath) == aiReturn_SUCCESS)
-            material.TextureNames[uint64(MaterialTextures::Roughness)] = GetFileName(AnsiToWString(roughnessMapPath.C_Str()).c_str());
+        // NOTE: None of the materials in the provided Sponza.fbx seems to have textures of type SHININESS.
+        //       Working around this by creating an array of the roughness map filenames which will be indexed into.
+        if(strlen(roughnessMaps[i]) != 0)
+            material.TextureNames[ uint64( MaterialTextures::Roughness ) ] = GetFileName( AnsiToWString( roughnessMaps[i] ).c_str() );
+#if 0
+        if( mat.GetTexture( aiTextureType_SHININESS, 0, &roughnessMapPath ) == aiReturn_SUCCESS )
+            material.TextureNames[ uint64( MaterialTextures::Roughness ) ] = GetFileName( AnsiToWString( roughnessMapPath.C_Str() ).c_str() );
+#endif // 0
+
 
         if(mat.GetTexture(aiTextureType_AMBIENT, 0, &metallicMapPath) == aiReturn_SUCCESS)
             material.TextureNames[uint64(MaterialTextures::Metallic)] = GetFileName(AnsiToWString(metallicMapPath.C_Str()).c_str());
