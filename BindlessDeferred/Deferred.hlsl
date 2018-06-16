@@ -22,6 +22,7 @@ struct DeferredConstants
 {
     row_major float4x4 InvViewProj;
     row_major float4x4 Projection;
+    row_major float4x4 View;
     float2 RTSize;
     uint NumComputeTilesX;
 };

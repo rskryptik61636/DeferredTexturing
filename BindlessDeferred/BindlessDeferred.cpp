@@ -95,6 +95,7 @@ struct DeferredConstants
 {
     Float4x4 InvViewProj;
     Float4x4 Projection;
+    Float4x4 View;
     Float2 RTSize;
     uint32 NumComputeTilesX = 0;
 };
@@ -2145,6 +2146,7 @@ void BindlessDeferred::RenderDeferred()
         DeferredConstants deferredConstants;
         deferredConstants.InvViewProj = Float4x4::Invert(camera.ViewProjectionMatrix());
         deferredConstants.Projection = camera.ProjectionMatrix();
+        deferredConstants.View = camera.ViewMatrix();
         deferredConstants.RTSize = Float2(float(mainTarget.Width()), float(mainTarget.Height()));
         deferredConstants.NumComputeTilesX = numComputeTilesX;
         DX12::BindTempConstantBuffer(cmdList, deferredConstants, DeferredParams_DeferredCBuffer, CmdListMode::Compute);
@@ -2422,6 +2424,13 @@ void BindlessDeferred::RenderHUD(const Timer& timer)
     Float2 textPos = Float2(25.0f, 25.0f);
     wstring fpsText = MakeString(L"Frame Time: %.2fms (%u FPS)", 1000.0f / fps, fps);
     spriteRenderer.RenderText(cmdList, font, fpsText.c_str(), textPos, Float4(1.0f, 1.0f, 0.0f, 1.0f));
+
+    if( AppSettings::ShowCameraPosition )
+    {
+        const auto& cameraPosition = camera.Position();
+        wstring strCameraPosition = MakeString( L"Camera Position: (%.3f, %.3f, %.3f)", cameraPosition.x, cameraPosition.y, cameraPosition.z );
+        spriteRenderer.RenderText( cmdList, font, strCameraPosition.c_str(), Float2(textPos.x, textPos.y + 50), Float4( 1.0f, 1.0f, 0.0f, 1.0f ) );
+    }
 
     spriteRenderer.End();
 }

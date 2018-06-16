@@ -56,6 +56,7 @@ namespace AppSettings
     FloatSetting BloomExposure;
     FloatSetting BloomMagnitude;
     FloatSetting BloomBlurSigma;
+    BoolSetting  EnableSSR;
     FloatSetting SSRoughnessMinThreshold;
     FloatSetting SSRoughnessMaxThreshold;
     BoolSetting EnableVSync;
@@ -68,7 +69,7 @@ namespace AppSettings
     BoolSetting ShowMSAAMask;
     BoolSetting ShowUVGradients;
     BoolSetting AnimateLightIntensity;
-    BoolSetting ShowSSRCompatibleOutput;
+    BoolSetting ShowCameraPosition;
     
     ConstantBuffer CBuffer;
     const uint32 CBufferRegister = 12;
@@ -161,6 +162,9 @@ namespace AppSettings
         BloomBlurSigma.Initialize("BloomBlurSigma", "Post Processing", "Bloom Blur Sigma", "Sigma parameter of the Gaussian filter used in the bloom pass", 2.5000f, 0.5000f, 2.5000f, 0.0100f, ConversionMode::None, 1.0000f);
         Settings.AddSetting(&BloomBlurSigma);
 
+        EnableSSR.Initialize( "EnableSSR", "Screen Space Reflections", "Enable SSR", "Enables Screen Space Reflections", false );
+        Settings.AddSetting( &EnableSSR );
+
         SSRoughnessMinThreshold.Initialize("SSRoughnessMinThreshold", "Screen Space Reflections", "Roughness Min Threshold", "Roughness min threshold for SSR", 0.07f, 0.0f, 1.0f, 0.01f, ConversionMode::None, 1.0000f);
         Settings.AddSetting(&SSRoughnessMinThreshold);
 
@@ -197,8 +201,8 @@ namespace AppSettings
         AnimateLightIntensity.Initialize("AnimateLightIntensity", "Debug", "Animate Light Intensity", "Modulates the light intensity to test buffer uploads", false);
         Settings.AddSetting(&AnimateLightIntensity);
 
-        ShowSSRCompatibleOutput.Initialize( "ShowSSRCompatibleOutput", "Debug", "Show SSR Compatible Output", "Shows the materials which are SSR compatible", false );
-        Settings.AddSetting( &ShowSSRCompatibleOutput );
+        ShowCameraPosition.Initialize( "ShowCameraPosition", "Debug", "Show Camera Position", "Shows the camera position in world space", false );
+        Settings.AddSetting( &ShowCameraPosition );
 
         ConstantBufferInit cbInit;
         cbInit.Size = sizeof(AppSettingsCBuffer);
@@ -228,6 +232,7 @@ namespace AppSettings
         cbData.BloomExposure = BloomExposure;
         cbData.BloomMagnitude = BloomMagnitude;
         cbData.BloomBlurSigma = BloomBlurSigma;
+        cbData.EnableSSR = EnableSSR;
         cbData.SSRoughnessMinThreshold = SSRoughnessMinThreshold;
         cbData.SSRoughnessMaxThreshold = SSRoughnessMaxThreshold;
         cbData.EnableAlbedoMaps = EnableAlbedoMaps;
@@ -238,7 +243,7 @@ namespace AppSettings
         cbData.ShowMSAAMask = ShowMSAAMask;
         cbData.ShowUVGradients = ShowUVGradients;
         cbData.AnimateLightIntensity = AnimateLightIntensity;
-        cbData.ShowSSRCompatibleOutput = ShowSSRCompatibleOutput;
+        cbData.ShowCameraPosition = ShowCameraPosition;
 
         CBuffer.MapAndSetData(cbData);
     }

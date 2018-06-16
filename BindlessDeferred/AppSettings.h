@@ -87,6 +87,7 @@ namespace AppSettings
     extern FloatSetting BloomExposure;
     extern FloatSetting BloomMagnitude;
     extern FloatSetting BloomBlurSigma;
+    extern BoolSetting EnableSSR;
     extern FloatSetting SSRoughnessMinThreshold;
     extern FloatSetting SSRoughnessMaxThreshold;
     extern BoolSetting EnableVSync;
@@ -99,7 +100,7 @@ namespace AppSettings
     extern BoolSetting ShowMSAAMask;
     extern BoolSetting ShowUVGradients;
     extern BoolSetting AnimateLightIntensity;
-    extern BoolSetting ShowSSRCompatibleOutput;
+    extern BoolSetting ShowCameraPosition;
 
     struct AppSettingsCBuffer
     {
@@ -115,6 +116,7 @@ namespace AppSettings
         float BloomExposure;
         float BloomMagnitude;
         float BloomBlurSigma;
+        bool32 EnableSSR;
         float SSRoughnessMinThreshold;
         float SSRoughnessMaxThreshold;
         bool32 EnableAlbedoMaps;
@@ -125,7 +127,7 @@ namespace AppSettings
         bool32 ShowMSAAMask;
         bool32 ShowUVGradients;
         bool32 AnimateLightIntensity;
-        bool32 ShowSSRCompatibleOutput;
+        bool32 ShowCameraPosition;
     };
 
     extern ConstantBuffer CBuffer;

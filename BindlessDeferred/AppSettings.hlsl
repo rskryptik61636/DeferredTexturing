@@ -12,6 +12,7 @@ struct AppSettings_Layout
     float BloomExposure;
     float BloomMagnitude;
     float BloomBlurSigma;
+    bool EnableSSR;
     float SSRoughnessMinThreshold;
     float SSRoughnessMaxThreshold;
     bool EnableAlbedoMaps;
@@ -22,7 +23,7 @@ struct AppSettings_Layout
     bool ShowMSAAMask;
     bool ShowUVGradients;
     bool AnimateLightIntensity;
-    bool ShowSSRCompatibleOutput;
+    bool ShowCameraPosition;
 };
 
 ConstantBuffer<AppSettings_Layout> AppSettings : register(b12);
